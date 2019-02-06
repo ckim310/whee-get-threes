@@ -11,6 +11,8 @@ Depending on which arrow key the user presses, all tiles will move one square in
 With this game (Whee get Threes), users will be able to:
 
 - [ ] Start, pause, and reset the game
+- [ ] Move tiles using arrow keys
+- [ ] Merge tiles to sum up and create a new tile
 
 
 ### Wireframes

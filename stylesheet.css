@@ -1,0 +1,12 @@
+.game-row {
+  border: 0.5px solid black;
+  height: 100px;
+  display: flex;
+  width: 400px;
+}
+
+.game-col {
+  border: 1px solid pink;
+  height: inherit;
+  width: 100px;
+}

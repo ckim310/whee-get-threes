@@ -57,7 +57,7 @@ export default class Board {
         if (this.grid[i][j] !== 0) {
           this.ctx.font = "50px Arial";
           this.ctx.textAlign = "center";
-          this.ctx.fillText(tileVal, i * w + w/2, j * w + w/2);
+          this.ctx.fillText(tileVal, i * w + w/2, j * w + w/2 + 15);
         }
       }
     }

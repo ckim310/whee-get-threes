@@ -38,7 +38,6 @@ export default class Board {
       } else {
         val = 3;
       }
-      // this.grid[tileIdx.x][tileIdx.y] = val;
       this.grid[tileIdx.x][tileIdx.y] = new Tile(val, tileIdx.x, tileIdx.y);
     }
   }
@@ -54,9 +53,11 @@ export default class Board {
         this.ctx.rect(i * w, j * w, w, w);
         this.ctx.stroke(); 
 
+        let tileVal = this.grid[i][j].value;
         if (this.grid[i][j] !== 0) {
           this.ctx.font = "50px Arial";
-          this.ctx.fillText(this.grid[i][j].value, 50, 50);
+          this.ctx.textAlign = "center";
+          this.ctx.fillText(tileVal, i * w + w/2, j * w + w/2);
         }
       }
     }

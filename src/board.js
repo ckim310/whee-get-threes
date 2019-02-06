@@ -44,20 +44,23 @@ export default class Board {
   }
 
   moveTile() {
-    
+
   }
 
   draw() {
-    let w = 400;
+    let w = 100;
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid.length; j++) {
-        this.ctx.noFill();
-        this.ctx.strokeWeight(2);
-        this.ctx.stroke();
         this.ctx.rect(i * w, j * w, w, w);
-        
+        this.ctx.stroke(); 
+
+        if (this.grid[i][j] !== 0) {
+          this.ctx.font = "50px Arial";
+          this.ctx.fillText(this.grid[i][j].value, 50, 50);
+        }
       }
-      
     }
+
+  
   }
 }

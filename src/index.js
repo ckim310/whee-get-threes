@@ -7,11 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ctx = canvasEl.getContext("2d");
   
-  // const board = new Board();
-  
   const game = new Game(ctx);
   game.setup();
   console.table(game.board.grid);
-  // game.fillStyle = "blue";
-  // new GameView(game, ctx).start();  
+
 });

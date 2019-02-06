@@ -2,7 +2,7 @@ import Board from './board';
 
 export default class Game {
   constructor(ctx){
-    this.board = new Board();
+    this.board = new Board(ctx);
     this.ctx = ctx;
   }
 

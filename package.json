@@ -1,0 +1,26 @@
+{
+  "name": "whee_get_threes",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ckim310/whee-get-threes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ckim310/whee-get-threes/issues"
+  },
+  "homepage": "https://github.com/ckim310/whee-get-threes#readme",
+  "devDependencies": {
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3"
+  }
+}

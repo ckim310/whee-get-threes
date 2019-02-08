@@ -9,6 +9,9 @@ export default class Board {
       [0,0,0,0]
     ];
     this.ctx = ctx;
+    this.previousBoard = null;
+    this.pos = [ [] ];
+    this.newTile = [];
   }
 
 
@@ -42,8 +45,49 @@ export default class Board {
     }
   }
 
-  moveTile() {
+  moveUp(row, rowIdx) {
+    const arr = row.map(el => {
+      return el;
+    });
+    
+    let newArr = [];
+    if (arr[0] === 0 || arr[0] === 0 && arr[1] === 0) {
+      newArr = newArr.concat(arr.slice(1));
+      newArr.push(0);
+    } else if (arr[1] === 0 || arr[1] === 0 && arr[2] === 0) {
+      newArr = newArr.concat(arr[0]).concat(arr.slice(2));
+      newArr.push(0);
+    } else if (arr[2] === 0) {
+      newArr = newArr.concat(arr[0]).concat(arr[1]).concat(arr.slice(3));
+      newArr.push(0);
+    } else {
+      newArr = arr;
+    }
 
+    this.grid[rowIdx] = newArr;
+  }
+
+  moveDown(row, rowIdx) {
+    const arr = row.map(el => {
+      return el;
+    });
+    
+    let newArr = [];
+    if (arr[3] === 0 || arr[3] === 0 && arr[2] === 0) {
+      newArr = arr;
+      newArr.pop();
+      newArr.unshift(0);
+    } else if (arr[2] === 0 || arr[2] === 0 && arr[1] === 0) {
+      newArr = newArr.concat(arr[0]).concat(arr[1]).concat(arr[3]);
+      newArr.unshift(0);
+    } else if (arr[1] === 0) {
+      newArr = newArr.concat(arr[0]).concat(arr[2]).concat(arr[3]);
+      newArr.unshift(0);
+    } else {
+      newArr = arr;
+    }
+
+    this.grid[rowIdx] = newArr;
   }
 
   draw() {
@@ -53,7 +97,7 @@ export default class Board {
         this.ctx.rect(i * w, j * w, w, w);
         this.ctx.stroke(); 
 
-        let tileVal = this.grid[i][j].value;
+        let tileVal = this.grid[i][j].value || 0;
         if (this.grid[i][j] !== 0) {
           this.ctx.font = "50px Arial";
           this.ctx.textAlign = "center";
@@ -61,7 +105,19 @@ export default class Board {
         }
       }
     }
+  }
 
-  
+  redraw() {
+    let w = 100;
+    for (let i = 0; i < this.grid.length; i++) {
+      for (let j = 0; j < this.grid.length; j++) {
+        this.ctx.rect(i * w, j * w, w, w);
+        this.ctx.stroke();
+
+        this.ctx.clearRect(i * w, j * w, w, w);
+      }
+    }
+
+    this.draw();    
   }
 }

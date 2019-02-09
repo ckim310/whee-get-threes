@@ -10,12 +10,12 @@ export default class Game {
     this.board.addNumber();
     this.board.addNumber();
     this.board.addNumber();
-    this.board.addNumber();
-    this.board.addNumber();
-    this.board.addNumber();
-    this.board.addNumber();
-    this.board.addNumber();
-    this.board.addNumber();
+    // this.board.addNumber();
+    // this.board.addNumber();
+    // this.board.addNumber();
+    // this.board.addNumber();
+    // this.board.addNumber();
+    // this.board.addNumber();
 
     this.board.draw();
   }
@@ -23,39 +23,54 @@ export default class Game {
   keyPressed(e) {
     const grid = this.board.grid;
 
+    let direction;
+
     switch (e.key) {
       case "ArrowUp":
-      for (let i = 0; i < grid.length; i++) {
-        this.board.moveUp(grid[i], i);
-      }
-      this.board.redraw();
+        direction = "up";
         break;
     
       case "ArrowDown":
-        for (let i = 0; i < grid.length; i++) {
-          this.board.moveDown(grid[i], i);
-        }
-        this.board.redraw();
+        direction = "down";
         break;
     
       case "ArrowLeft":
-        // for (let i = 0; i < grid.length; i++) {
-        //   this.board.moveTile(grid[i], i);
-        // }
+        direction = "left";
         break;
     
       case "ArrowRight":
-        // for (let i = 0; i < grid.length; i++) {
-        //   this.board.moveTile(grid[i], i);
-        // }
+        direction = "right";
         break;
     
       default:
-      // debugger
-        for (let i = 0; i < grid.length; i++) {
-          this.board.moveUp(grid[i], i);
-        }
         break;
     }
+
+    if (direction === "right" || direction === "left") {
+      this.board.grid = this.board.rotate();
+    }
+
+    if (direction === "up" || direction === "left") {
+      for (let i = 0; i < this.board.grid.length; i++) {
+        this.board.moveUp(this.board.grid[i], i);  
+      }
+    }
+
+    if (direction === "down" || direction === "right") {
+      for (let i = 0; i < this.board.grid.length; i++) {
+        this.board.moveDown(this.board.grid[i], i);  
+      }
+    }
+
+    if (direction === "right" || direction === "left") {
+      this.board.grid = this.board.rotate();
+    }
+
+    // for (let i = 0; i < this.board.grid.length; i++) {
+    //   const row = this.board.grid[i];
+      
+    //   this.board.merge(row, i);
+    // }
+    this.board.redraw();
   }
 }

@@ -45,7 +45,7 @@ export default class Board {
     }
   }
 
-  moveUp(row, rowIdx) {
+    moveUp(row, rowIdx) {
     const arr = row.map(el => {
       return el;
     });
@@ -63,7 +63,7 @@ export default class Board {
     } else {
       newArr = arr;
     }
-
+    // this.addNumber();
     this.grid[rowIdx] = newArr;
   }
 
@@ -86,8 +86,64 @@ export default class Board {
     } else {
       newArr = arr;
     }
-
+    // this.addNumber();
     this.grid[rowIdx] = newArr;
+  }
+
+  merge(row, rowIdx) {
+    // debugger
+    for (let i = 3; i > 0; i--) {
+      // debugger
+      if (row[i] !== 0 && row[i - 1] !== 0) {
+        if (row[i].value === row[i-1].value) {
+        // debugger
+        row[i - 1] = new Tile(row[i].value * 2, rowIdx, i, false, true);
+        row[i] = 0;
+        } else {
+          continue;
+        }
+      }
+      // debugger
+    }
+    this.grid[rowIdx] = row;
+    // debugger
+    
+
+  }
+
+  rotate() {
+    let newGrid = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ];
+
+    for (let i = 0; i < this.grid.length; i++) {
+      for (let j = 0; j < this.grid.length; j++) {
+        newGrid[i][j] = this.grid[j][i];
+      }
+    }
+
+    return newGrid;
+  }
+
+
+  prevBoard() {
+    let prevGrid = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ];
+
+    for (let i = 0; i < this.grid.length; i++) {
+      for (let j = 0; j < this.grid.length; j++) {
+        prevGrid[i][j] = this.grid[i][j];
+      }    
+    }
+
+    return prevGrid;
   }
 
   draw() {
@@ -99,8 +155,9 @@ export default class Board {
 
         let tileVal = this.grid[i][j].value || 0;
         if (this.grid[i][j] !== 0) {
-          this.ctx.font = "50px Arial";
+          this.ctx.font = "bold 50px Courier New";
           this.ctx.textAlign = "center";
+          this.ctx.fillStyle= "black";
           this.ctx.fillText(tileVal, i * w + w/2, j * w + w/2 + 15);
         }
       }

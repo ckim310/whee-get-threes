@@ -9,9 +9,6 @@ export default class Board {
       [0,0,0,0]
     ];
     this.ctx = ctx;
-    this.previousBoard = null;
-    this.pos = [ [] ];
-    this.newTile = [];
   }
 
 
@@ -34,9 +31,7 @@ export default class Board {
       let tileIdx = empty[Math.floor(Math.random() * empty.length)];
       let r = Math.random();
       let val;
-      if (r > 0.8) {
-        val = 2;
-      } else if ( r > 0.4 ) {
+      if ( r > 0.5 ) {
         val = 1;
       } else {
         val = 3;
@@ -45,7 +40,7 @@ export default class Board {
     }
   }
 
-    moveUp(row, rowIdx) {
+  move(row, rowIdx) {
     const arr = row.map(el => {
       return el;
     });
@@ -63,52 +58,26 @@ export default class Board {
     } else {
       newArr = arr;
     }
-    // this.addNumber();
-    this.grid[rowIdx] = newArr;
-  }
-
-  moveDown(row, rowIdx) {
-    const arr = row.map(el => {
-      return el;
-    });
-    
-    let newArr = [];
-    if (arr[3] === 0 || arr[3] === 0 && arr[2] === 0) {
-      newArr = arr;
-      newArr.pop();
-      newArr.unshift(0);
-    } else if (arr[2] === 0 || arr[2] === 0 && arr[1] === 0) {
-      newArr = newArr.concat(arr[0]).concat(arr[1]).concat(arr[3]);
-      newArr.unshift(0);
-    } else if (arr[1] === 0) {
-      newArr = newArr.concat(arr[0]).concat(arr[2]).concat(arr[3]);
-      newArr.unshift(0);
-    } else {
-      newArr = arr;
-    }
-    // this.addNumber();
     this.grid[rowIdx] = newArr;
   }
 
   merge(row, rowIdx) {
-    // debugger
     for (let i = 3; i > 0; i--) {
-      // debugger
       if (row[i] !== 0 && row[i - 1] !== 0) {
-        if (row[i].value === row[i-1].value) {
-        // debugger
-        row[i - 1] = new Tile(row[i].value * 2, rowIdx, i, false, true);
-        row[i] = 0;
+        if (row[i].value === row[i-1].value && (row[i].value !== 2)) {
+          row[i - 1] = new Tile(row[i].value * 2, rowIdx, i, false, true);
+          row[i] = 0;
+          break;
+        } else if ((row[i].value === 1 && row[i - 1].value === 2) || (row[i].value === 2 && row[i - 1].value === 1)) {
+          row[i - 1] = new Tile(3, rowIdx, i, false, true);
+          row[i] = 0;
+          break;
         } else {
           continue;
         }
       }
-      // debugger
     }
     this.grid[rowIdx] = row;
-    // debugger
-    
-
   }
 
   rotate() {
@@ -128,22 +97,10 @@ export default class Board {
     return newGrid;
   }
 
-
-  prevBoard() {
-    let prevGrid = [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ];
-
+  reverse() {
     for (let i = 0; i < this.grid.length; i++) {
-      for (let j = 0; j < this.grid.length; j++) {
-        prevGrid[i][j] = this.grid[i][j];
-      }    
+      this.grid[i].reverse();
     }
-
-    return prevGrid;
   }
 
   draw() {

@@ -9,13 +9,4 @@ export default class Tile {
     this.previousPos = null;
     this.mergedFrom = null;
   }
-
-  savePosition() {
-    this.previousPos = {x: this.x, y: this.y};
-  }
-
-  updatePosition(pos) {
-    this.x = pos.x;
-    this.y = pos.y;
-  }
 }

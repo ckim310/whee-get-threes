@@ -107,7 +107,8 @@ export default class Board {
     let w = 100;
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid.length; j++) {
-        this.ctx.rect(i * w, j * w, w, w);
+        this.ctx.fillStyle = "white";
+        this.ctx.fillRect(i * w, j * w, w, w);
         this.ctx.stroke(); 
 
         let tileVal = this.grid[i][j].value || 0;

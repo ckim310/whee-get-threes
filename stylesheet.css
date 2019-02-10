@@ -1,6 +1,9 @@
 body {
-  font-family: 'Pacifico', 'cursive', 'sans-serif';
-  background-color: #fbf5f3;
+  font-family: 'Special Elite', 'cursive', 'sans-serif';
+  background-image: url('./images/typewriter.jpg');
+  background-position: center;
+  background-size: cover;
+  /* background-color: #fbf5f3; */
   color: #2e2f2f;
 }
 
@@ -8,7 +11,6 @@ body {
   border: 1px solid black;
   margin: 0 auto;
   display: flex;
-  font: 'Pacifico';
 }
 
 h1.title {

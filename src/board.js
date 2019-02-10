@@ -107,15 +107,61 @@ export default class Board {
     let w = 100;
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid.length; j++) {
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(i * w, j * w, w, w);
+        // this.ctx.fillStyle = "";
+        this.ctx.rect(i * w, j * w, w, w);
         this.ctx.stroke(); 
+
+        if (this.grid[i][j] === 0) {
+          this.ctx.fillStyle = "#E8EAEE";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 1) {
+          this.ctx.fillStyle = "#59D2FE";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 2) {
+          this.ctx.fillStyle = "#44E5E7";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 3) {
+          this.ctx.fillStyle = "#2191FB";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 6) {
+          this.ctx.fillStyle = "#6D72C3";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 12) {
+          this.ctx.fillStyle = "#C2AFF0";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 24) {
+          this.ctx.fillStyle = "#AB81CD";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 48) {
+          this.ctx.fillStyle = "#59C3C3";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 96) {
+          this.ctx.fillStyle = "#87BFFF";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else if (this.grid[i][j].value === 192) {
+          this.ctx.fillStyle = "#3F8EFC";
+          this.ctx.fillRect(i * w, j * w, w, w);
+          this.ctx.stroke();
+        } else {
+          this.ctx.fillStyle = "#4056F4";
+          this.ctx.fillRect(i * w, j * w, w, w); 
+          this.ctx.stroke();
+        }
 
         let tileVal = this.grid[i][j].value || 0;
         if (this.grid[i][j] !== 0) {
           this.ctx.font = "bold 50px Courier New";
           this.ctx.textAlign = "center";
-          this.ctx.fillStyle= "black";
+          this.ctx.fillStyle= "white";
           this.ctx.fillText(tileVal, i * w + w/2, j * w + w/2 + 15);
         }
       }

@@ -119,7 +119,11 @@ export default class Game {
       for (let j = 0; j < this.board.grid.length; j++) {
         if (this.board.grid[i][j] === 0) {
           return false;
-        } else if (j < 3 && (this.board.grid[i][j].value === this.board.grid[i][j+1].value || this.board.rotate()[i][j].value === this.board.rotate()[i][j+1].value)) {
+        } else if (j < 3 &&
+          (((this.board.grid[i][j].value !== 2) && this.board.grid[i][j].value === this.board.grid[i][j + 1].value) || ((this.board.rotate()[i][j] !== 2) && this.board.rotate()[i][j].value === this.board.rotate()[i][j+1].value))) {
+          return false;
+        } else if (j < 3 &&
+          ((this.board.grid[i][j].value + this.board.grid[i][j+1].value) === 3 || (this.board.rotate()[i][j].value + this.board.rotate()[i][j+1].value) === 3)) {
           return false;
         }
       }

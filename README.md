@@ -21,7 +21,7 @@ With this game (Whee get Threes), users will be able to:
 
 This game will consist of a single screen with a grid/board, game controls, and nav links to the Github and my LinkedIn.  Game controls will include arrow keys, pause, and reset buttons.
 
-![wireframes](wireframe.png)
+![wireframes](images/wireframe.png)
 
 ### Architecture and Technologies
 

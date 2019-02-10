@@ -1,5 +1,7 @@
 ## Whee get Threes
 
+[Live link](https://ckim310.github.io/whee-get-threes/)
+
 ### Overview
 
 Whee get Threes is a play on the game Threes. The objective of the game is to slide the tiles on the grid and combine them with a tile of the same number (excluding a tile with 2, that can only be combined with a tile with 1) to create the highest possible multiple of three. The game will start with a random tile of 1, 2, or 3 in a random position.

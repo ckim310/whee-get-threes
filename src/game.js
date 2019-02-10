@@ -92,6 +92,7 @@ export default class Game {
       this.ctx.textAlign = "center";
       this.ctx.fillStyle = "red";
       this.ctx.fillText("Game Over", 200, 200);
+      console.log("game over");
       
       this.removeKey();
     } else {

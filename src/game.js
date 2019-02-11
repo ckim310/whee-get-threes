@@ -46,6 +46,8 @@ export default class Game {
         direction = "right";
         break;
 
+      case " ":
+        break;
       default:
         break;
     }
@@ -87,14 +89,20 @@ export default class Game {
 
     this.down = true;
     if (this.gameOver()) {
+      const finalScore = this.countScore();
+
+      this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+      this.ctx.fillRect(0, 0, 400, 400);
       this.ctx.stroke();
-      this.ctx.font = "bold 50px Courier New";
+
+      this.ctx.font = "bold 60px Courier New";
       this.ctx.textAlign = "center";
       this.ctx.fillStyle = "red";
-      this.ctx.fillText("Game Over", 200, 200);
-      console.log("game over");
+      this.ctx.fillText("Game Over", 200, 150);
+      this.ctx.fillText("Score:" + finalScore, 200, 250);
       
       this.removeKey();
+      window.addEventListener("keydown", this.restart);
     } else {
       this.keyPressed(e);
     }
@@ -114,13 +122,26 @@ export default class Game {
     this.addKey();
   }
 
+  countScore() {
+    let score = 0;
+    for (let i = 0; i < this.board.grid.length; i++) {
+      for (let j = 0; j < this.board.grid.length; j++) {
+        if (this.board.grid[i][j].value % 3 === 0) {
+          score += this.board.grid[i][j].value;
+        }
+      }
+    }
+    return score;
+
+  }
+
   gameOver() {
     for (let i = 0; i < this.board.grid.length; i++) {
       for (let j = 0; j < this.board.grid.length; j++) {
         if (this.board.grid[i][j] === 0) {
           return false;
         } else if (j < 3 &&
-          (((this.board.grid[i][j].value !== 2) && this.board.grid[i][j].value === this.board.grid[i][j + 1].value) || ((this.board.rotate()[i][j] !== 2) && this.board.rotate()[i][j].value === this.board.rotate()[i][j+1].value))) {
+          (((this.board.grid[i][j].value !== 2) && this.board.grid[i][j].value === this.board.grid[i][j + 1].value) || ((this.board.rotate()[i][j].value !== 2) && this.board.rotate()[i][j].value === this.board.rotate()[i][j+1].value))) {
           return false;
         } else if (j < 3 &&
           ((this.board.grid[i][j].value + this.board.grid[i][j+1].value) === 3 || (this.board.rotate()[i][j].value + this.board.rotate()[i][j+1].value) === 3)) {

@@ -9,7 +9,5 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const game = new Game(ctx);
   game.setup();
-  // console.table(game.board.grid);
   game.play();
-
 });

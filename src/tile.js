@@ -5,8 +5,5 @@ export default class Tile {
     this.y = y;
     this.isNew = isNew;
     this.isMerged = isMerged;
-
-    this.previousPos = null;
-    this.mergedFrom = null;
   }
 }

@@ -3,14 +3,13 @@ body {
   background-image: url('./images/typewriter.jpg');
   background-position: center;
   background-size: cover;
-  /* background-color: #fbf5f3; */
+  background-repeat: no-repeat;
   color: #2e2f2f;
 }
 
-.game-board {
-  border: 1px solid black;
-  margin: 0 auto;
+.game-page {
   display: flex;
+  flex-direction: column;
 }
 
 h1.title {
@@ -18,7 +17,42 @@ h1.title {
   font-size: 45px;
 }
 
-.game-page {
+.game-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.game-board {
+  border: 1px solid black;
+  margin: 0 auto;
+  display: flex;
+  width: 33.33%;
+  height: 100%;
+}
+
+.link-container {
+  width: 33.33%;
+  font-size: 20px;
+  line-height: 2.5;
+}
+
+.links {
+  width: 170px;
+  margin: 100px auto;
+}
+
+.controls-container {
+  width: 33.33%;
+}
+
+.arrows {
+  width: 170px;
+  margin: 105px auto;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.arrow-text {
+  margin-top: 10px;
 }

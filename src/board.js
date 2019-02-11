@@ -9,6 +9,7 @@ export default class Board {
       [0,0,0,0]
     ];
     this.ctx = ctx;
+    this.draw = this.draw.bind(this);
   }
 
 
@@ -107,7 +108,7 @@ export default class Board {
     let w = 100;
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid.length; j++) {
-        // this.ctx.fillStyle = "";
+
         this.ctx.rect(i * w, j * w, w, w);
         this.ctx.stroke(); 
 
@@ -166,6 +167,8 @@ export default class Board {
         }
       }
     }
+
+    // window.requestAnimationFrame(this.draw);
   }
 
   redraw() {

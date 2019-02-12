@@ -1,9 +1,17 @@
-body {
-  font-family: 'Special Elite', 'cursive', 'sans-serif';
-  background-image: url('./images/typewriter.jpg');
+html {
+  background: url('./images/typewriter.jpg') no-repeat center center fixed;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Special Elite', 'cursive', 'sans-serif';
+  width: 100%;
   color: #2e2f2f;
 }
 
@@ -12,9 +20,19 @@ body {
   flex-direction: column;
 }
 
-h1.title {
+.title-container {
   text-align: center;
+}
+
+h1.title {
   font-size: 45px;
+}
+
+.sub-title {
+  position: relative;
+  left: 83px;
+  margin-top: -25px;
+  font-size: 14px;
 }
 
 .game-container {
@@ -27,32 +45,70 @@ h1.title {
   border: 1px solid black;
   margin: 0 auto;
   display: flex;
-  width: 33.33%;
+  width: 33.3333%;
   height: 100%;
 }
 
 .link-container {
-  width: 33.33%;
-  font-size: 20px;
+  width: 33.3333%;
+  font-size: 22px;
   line-height: 2.5;
+  margin: auto;
 }
 
 .links {
-  width: 170px;
-  margin: 100px auto;
+  width: 185px;
+  margin: auto;
 }
 
 .controls-container {
-  width: 33.33%;
+  width: 33.3333%;
+  margin: auto;
+}
+
+.controls-title {
+  width: 170px;
+  margin: auto;
+  text-align: center;
+  text-decoration: underline;
+  font-size: 20px;
 }
 
 .arrows {
   width: 170px;
-  margin: 105px auto;
+  margin: 10px auto;
   line-height: 1.5;
   text-align: center;
 }
 
 .arrow-text {
   margin-top: 10px;
+}
+
+.space-bar {
+  width: inherit;
+  margin: 20px auto;
+  text-align: center;
+  line-height: 1.5;
+}
+
+strong {
+  font-size: 20px;
+}
+
+/* footer */
+footer {
+  position: absolute;
+  bottom: 0;
+  float: right;
+  width: inherit;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo-cred {
+  margin-right: 10px;
 }

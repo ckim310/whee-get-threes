@@ -11,6 +11,8 @@ export default class Game {
     this.addKey = this.addKey.bind(this);
     this.removeKey = this.removeKey.bind(this);
     this.handleGame = this.handleGame.bind(this);
+    this.setup = this.setup.bind(this);
+    this.restart = this.restart.bind(this);
   }
 
   setup(){
@@ -47,8 +49,8 @@ export default class Game {
         break;
 
       case " ":
-        break;
-      default:
+        this.board = new Board(this.ctx);
+        this.setup();
         break;
     }
 
@@ -100,8 +102,12 @@ export default class Game {
       this.ctx.fillStyle = "red";
       this.ctx.fillText("Game Over", 200, 150);
       this.ctx.fillText("Score:" + finalScore, 200, 250);
+      this.ctx.font = "bold 20px Courier New";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText("Press spacebar to restart", 200, 330);
       
       this.removeKey();
+
       window.addEventListener("keydown", this.restart);
     } else {
       this.keyPressed(e);
@@ -120,6 +126,25 @@ export default class Game {
 
   play() {
     this.addKey();
+    window.removeEventListener("keydown", this.restart);
+  }
+
+  restart(e) {
+    let restart;
+    switch (e.key) {
+      case " ":
+        restart = true;
+        break;
+      default:
+        restart = false;
+        break;
+    }
+
+    if (restart) {
+      this.board = new Board(this.ctx);
+      this.setup();
+      this.play();
+    }
   }
 
   countScore() {

@@ -42,7 +42,7 @@ h1.title {
 }
 
 .game-board {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 0 auto;
   display: flex;
   width: 33.3333%;

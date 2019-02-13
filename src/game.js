@@ -6,6 +6,7 @@ export default class Game {
     this.ctx = ctx;
 
     this.down = false;
+    this.playing = true;
 
     this.keyPressed = this.keyPressed.bind(this);
     this.addKey = this.addKey.bind(this);
@@ -19,7 +20,6 @@ export default class Game {
     for (let i = 0; i < this.board.grid.length; i++) {
       this.board.addNumber();
     }
-
     this.board.draw();
   }
 
@@ -81,21 +81,23 @@ export default class Game {
 
     if (direction) {
       this.board.addNumber();
-      this.board.redraw();
     }
   }
 
   handleGame(e) {
     if (this.down) return;
-    e.preventDefault();
+
+    if(this.playing) {
+      this.board.draw();
+    }
 
     this.down = true;
     if (this.gameOver()) {
+      this.playing = false;
       const finalScore = this.countScore();
 
       this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      this.ctx.fillRect(0, 0, 400, 400);
-      this.ctx.stroke();
+      this.ctx.fillRect(0, 30, 400, 430);
 
       this.ctx.font = "bold 60px Courier New";
       this.ctx.textAlign = "center";
@@ -107,13 +109,16 @@ export default class Game {
       this.ctx.fillText("Press spacebar to restart", 200, 330);
       
       this.removeKey();
-
+      
       window.addEventListener("keydown", this.restart);
+      return;
     } else {
       this.keyPressed(e);
     }
 
     this.down = false;
+    
+    window.requestAnimationFrame(this.handleGame);
   }
 
   addKey() {
@@ -134,6 +139,8 @@ export default class Game {
     switch (e.key) {
       case " ":
         restart = true;
+        this.playing = true;
+        this.down = false;
         break;
       default:
         restart = false;

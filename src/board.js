@@ -105,57 +105,48 @@ export default class Board {
   }
 
   draw() {
+    this.ctx.clearRect(0, 0, 400, 430);
+
+    this.scoreBoard();
     let w = 100;
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid.length; j++) {
 
         this.ctx.rect(i * w, j * w, w, w);
-        this.ctx.stroke(); 
 
         if (this.grid[i][j] === 0) {
           this.ctx.fillStyle = "#E8EAEE";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w + 30, w, w);
         } else if (this.grid[i][j].value === 1) {
           this.ctx.fillStyle = "#59D2FE";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 2) {
           this.ctx.fillStyle = "#44E5E7";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 3) {
           this.ctx.fillStyle = "#2191FB";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 6) {
           this.ctx.fillStyle = "#6D72C3";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 12) {
           this.ctx.fillStyle = "#C2AFF0";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 24) {
           this.ctx.fillStyle = "#AB81CD";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 48) {
           this.ctx.fillStyle = "#59C3C3";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 96) {
           this.ctx.fillStyle = "#87BFFF";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 192) {
           this.ctx.fillStyle = "#3F8EFC";
-          this.ctx.fillRect(i * w, j * w, w, w);
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w);
         } else {
           this.ctx.fillStyle = "#4056F4";
-          this.ctx.fillRect(i * w, j * w, w, w); 
-          this.ctx.stroke();
+          this.ctx.fillRect(i * w, j * w +30, w, w); 
         }
 
         let tileVal = this.grid[i][j].value || 0;
@@ -163,12 +154,10 @@ export default class Board {
           this.ctx.font = "bold 50px Courier New";
           this.ctx.textAlign = "center";
           this.ctx.fillStyle= "white";
-          this.ctx.fillText(tileVal, i * w + w/2, j * w + w/2 + 15);
+          this.ctx.fillText(tileVal, i * w + w/2, j * w + w/2 + 45);
         }
       }
     }
-
-    // window.requestAnimationFrame(this.draw);
   }
 
   redraw() {
@@ -184,4 +173,22 @@ export default class Board {
 
     this.draw();    
   }
+
+  scoreBoard() {
+    let score = 0;
+    for (let i = 0; i < this.grid.length; i++) {
+      for (let j = 0; j < this.grid.length; j++) {
+        if (this.grid[i][j] !== 0) {
+          if (this.grid[i][j].value % 3 === 0) {
+            score += this.grid[i][j].value;
+          }
+        }
+      }
+    }
+    this.ctx.font = "18px Courier New";
+    this.ctx.textAlign = "center";
+    this.ctx.fillStyle = "black";
+    this.ctx.fillText("Score:" + score, 55, 20);
+  }
+
 }

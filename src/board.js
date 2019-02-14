@@ -185,7 +185,7 @@ export default class Board {
         }
       }
     }
-    this.ctx.font = "18px Courier New";
+    this.ctx.font = "bold 16px Courier New";
     this.ctx.textAlign = "center";
     this.ctx.fillStyle = "black";
     this.ctx.fillText("Score:" + score, 55, 20);

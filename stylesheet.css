@@ -1,8 +1,9 @@
 html {
-  background: url('./images/typewriter.jpg') no-repeat center center fixed;
+  background: linear-gradient( rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+  url('./images/typewriter.jpg') center center fixed;
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -42,7 +43,6 @@ h1.title {
 }
 
 .game-board {
-  /* border: 1px solid black; */
   margin: 0 auto;
   display: flex;
   width: 33.3333%;
@@ -66,12 +66,19 @@ h1.title {
   margin: auto;
 }
 
-.controls-title {
+.game-instructions {
+  max-width: 320px;
+  margin: auto;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.controls-title, .instructions-title {
   width: 170px;
   margin: auto;
   text-align: center;
   text-decoration: underline;
-  font-size: 20px;
 }
 
 .arrows {

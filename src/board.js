@@ -19,7 +19,8 @@ export default class Board {
       const row = this.grid[i];
       for (let j = 0; j < row.length; j++) {
         const tile = row[j];
-        if (tile === 0) {
+        if (tile === 0 || tile.value === 0) {
+          this.grid[i][j] = new Tile(0, i, j);
           empty.push({
             x: i,
             y: j
@@ -27,9 +28,11 @@ export default class Board {
         }
       }
     }
-
+    
     if (empty.length > 0) {
-      let tileIdx = empty[Math.floor(Math.random() * empty.length)];
+      let emptyIdx = Math.floor(Math.random() * empty.length);
+      let tileIdx = empty[emptyIdx];
+      empty.splice(emptyIdx, 1);
       let r = Math.random();
       let val;
       if ( r > 0.5 ) {
@@ -45,37 +48,42 @@ export default class Board {
     const arr = row.map(el => {
       return el;
     });
-    
     let newArr = [];
-    if (arr[0] === 0 || arr[0] === 0 && arr[1] === 0) {
+    if (arr[0].value === 0) {
       newArr = newArr.concat(arr.slice(1));
-      newArr.push(0);
-    } else if (arr[1] === 0 || arr[1] === 0 && arr[2] === 0) {
+      newArr.push(arr[0]);
+    } else if (arr[1].value === 0) {
       newArr = newArr.concat(arr[0]).concat(arr.slice(2));
-      newArr.push(0);
-    } else if (arr[2] === 0) {
+      newArr.push(arr[1]);
+    } else if (arr[2].value === 0) {
       newArr = newArr.concat(arr[0]).concat(arr[1]).concat(arr.slice(3));
-      newArr.push(0);
+      newArr.push(arr[2]);
     } else {
       newArr = arr;
     }
+    
     this.grid[rowIdx] = newArr;
+    for (let i = this.grid.length - 1; i > 0; i--) {
+      this.grid[rowIdx][i].x = rowIdx;
+      this.grid[rowIdx][i].y = i;
+      this.grid[rowIdx][i - 1].x = rowIdx;
+      this.grid[rowIdx][i - 1].y = i - 1;
+    }
+
   }
 
   merge(row, rowIdx) {
-    for (let i = 3; i > 0; i--) {
-      if (row[i] !== 0 && row[i - 1] !== 0) {
-        if (row[i].value === row[i-1].value && (row[i].value !== 2)) {
-          row[i - 1] = new Tile(row[i].value * 2, rowIdx, i, false, true);
-          row[i] = 0;
-          break;
-        } else if ((row[i].value === 1 && row[i - 1].value === 2) || (row[i].value === 2 && row[i - 1].value === 1)) {
-          row[i - 1] = new Tile(3, rowIdx, i, false, true);
-          row[i] = 0;
-          break;
-        } else {
-          continue;
-        }
+    for (let i = 0; i < 3; i++) {
+      if (row[i].value === row[i+1].value && (row[i].value !== 2) && (row[i].value !== 0)) {
+        row[i] = new Tile(row[i].value * 2, rowIdx, i, false, true);
+        row[i + 1] = new Tile(0, rowIdx, i + 1);
+        break;
+      } else if ((row[i].value + row[i + 1].value) === 3) {
+        row[i] = new Tile(3, rowIdx, i, false, true);
+        row[i + 1] = new Tile(0, rowIdx, i + 1);
+        break;
+      } else {
+        continue;
       }
     }
     this.grid[rowIdx] = row;
@@ -114,7 +122,7 @@ export default class Board {
 
         this.ctx.rect(i * w, j * w, w, w);
 
-        if (this.grid[i][j] === 0) {
+        if (this.grid[i][j].value === 0) {
           this.ctx.fillStyle = "#E8EAEE";
           this.ctx.fillRect(i * w, j * w + 30, w, w);
         } else if (this.grid[i][j].value === 1) {
@@ -150,7 +158,7 @@ export default class Board {
         }
 
         let tileVal = this.grid[i][j].value || 0;
-        if (this.grid[i][j] !== 0) {
+        if (this.grid[i][j].value !== 0) {
           this.ctx.font = "bold 50px Courier New";
           this.ctx.textAlign = "center";
           this.ctx.fillStyle= "white";

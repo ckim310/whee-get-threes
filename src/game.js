@@ -56,7 +56,7 @@ export default class Game {
 
     if (direction) {
       for (let i = 0; i < this.board.grid.length; i++) {
-        this.board.move(this.board.grid[i], i);  
+        this.board.move(this.board.grid[i], i);
       }
     }
 
@@ -170,7 +170,7 @@ export default class Game {
   gameOver() {
     for (let i = 0; i < this.board.grid.length; i++) {
       for (let j = 0; j < this.board.grid.length; j++) {
-        if (this.board.grid[i][j] === 0) {
+        if (this.board.grid[i][j].value === 0) {
           return false;
         } else if (j < 3 &&
           (((this.board.grid[i][j].value !== 2) && this.board.grid[i][j].value === this.board.grid[i][j + 1].value) || ((this.board.rotate()[i][j].value !== 2) && this.board.rotate()[i][j].value === this.board.rotate()[i][j+1].value))) {

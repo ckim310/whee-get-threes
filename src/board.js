@@ -64,6 +64,8 @@ export default class Board {
     
     this.grid[rowIdx] = newArr;
     for (let i = this.grid.length - 1; i > 0; i--) {
+
+      // window.setTimeout(() => this.slideTile({x: rowIdx, y: i}, {x: rowIdx, y: i - 1}), 1000);
       this.grid[rowIdx][i].x = rowIdx;
       this.grid[rowIdx][i].y = i;
       this.grid[rowIdx][i - 1].x = rowIdx;
@@ -71,6 +73,13 @@ export default class Board {
     }
 
   }
+
+  // slideTile(toLoc, fromLoc) {
+  //   this.grid[toLoc.x][toLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
+  //   this.grid[toLoc.x][toLoc.y].y = toLoc.y;
+  //   this.grid[fromLoc.x][fromLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
+  //   this.grid[toLoc.x][toLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
+  // }
 
   merge(row, rowIdx) {
     for (let i = 0; i < 3; i++) {
@@ -150,7 +159,7 @@ export default class Board {
           this.ctx.fillStyle = "#87BFFF";
           this.ctx.fillRect(i * w, j * w +30, w, w);
         } else if (this.grid[i][j].value === 192) {
-          this.ctx.fillStyle = "#3F8EFC";
+          this.ctx.fillStyle = "#99E1D9";
           this.ctx.fillRect(i * w, j * w +30, w, w);
         } else {
           this.ctx.fillStyle = "#4056F4";

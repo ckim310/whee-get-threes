@@ -51,14 +51,25 @@ h1.title {
 
 .link-container {
   width: 33.3333%;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 2.5;
   margin: auto;
 }
 
 .links {
-  width: 185px;
+  width: fit-content;
   margin: auto;
+}
+
+.links a {
+  text-decoration: none;
+  color: black;
+}
+
+.links #link:hover {
+  color: pink;
+  transition: 0.3s;
+  transform: scale(1.2);
 }
 
 .controls-container {

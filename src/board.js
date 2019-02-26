@@ -131,21 +131,25 @@ export default class Board {
   }
 
   draw() {
-    this.ctx.clearRect(0, 0, 400, 430);
+    this.ctx.clearRect(0, 0, 400, 30);
+
 
     this.scoreBoard();
     let w = 100;
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid.length; j++) {
 
-        this.ctx.rect(i * w, j * w, w, w);
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "grey";
+        this.ctx.rect(i * w, j * w + 30, w, w);
+
 
         if (this.grid[i][j].value === 0) {
           this.ctx.fillStyle = "#E8EAEE";
           this.ctx.fillRect(i * w, j * w + 30, w, w);
         } else if (this.grid[i][j].value === 1) {
           this.ctx.fillStyle = "#59D2FE";
-          this.ctx.fillRect(i * w, j * w +30, w, w);
+          this.ctx.fillRect(i * w, j * w + 30, w, w);
         } else if (this.grid[i][j].value === 2) {
           this.ctx.fillStyle = "#44E5E7";
           this.ctx.fillRect(i * w, j * w +30, w, w);
@@ -175,6 +179,8 @@ export default class Board {
           this.ctx.fillRect(i * w, j * w +30, w, w); 
         }
 
+        this.ctx.stroke();
+
         let tileVal = this.grid[i][j].value || 0;
         if (this.grid[i][j].value !== 0) {
           this.ctx.font = "bold 50px Courier New";
@@ -184,6 +190,11 @@ export default class Board {
         }
       }
     }
+
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = "grey";
+    this.ctx.rect(0.5, 30, 399, 399);
+    this.ctx.stroke();
   }
 
   scoreBoard() {

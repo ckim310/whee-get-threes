@@ -62,24 +62,33 @@ export default class Board {
       newArr = arr;
     }
     
-    this.grid[rowIdx] = newArr;
-    for (let i = this.grid.length - 1; i > 0; i--) {
+    this.slideTile(newArr, rowIdx);
+    // this.grid[rowIdx] = newArr;
+    // for (let i = this.grid.length - 1; i > 0; i--) {
 
-      // window.setTimeout(() => this.slideTile({x: rowIdx, y: i}, {x: rowIdx, y: i - 1}), 1000);
-      this.grid[rowIdx][i].x = rowIdx;
-      this.grid[rowIdx][i].y = i;
-      this.grid[rowIdx][i - 1].x = rowIdx;
-      this.grid[rowIdx][i - 1].y = i - 1;
-    }
+    //   // window.setTimeout(() => this.slideTile({x: rowIdx, y: i}, {x: rowIdx, y: i - 1}), 1000);
+    //   this.grid[rowIdx][i].x = rowIdx;
+    //   this.grid[rowIdx][i].y = i;
+    //   this.grid[rowIdx][i - 1].x = rowIdx;
+    //   this.grid[rowIdx][i - 1].y = i - 1;
+    // }
 
   }
 
-  // slideTile(toLoc, fromLoc) {
-  //   this.grid[toLoc.x][toLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
-  //   this.grid[toLoc.x][toLoc.y].y = toLoc.y;
-  //   this.grid[fromLoc.x][fromLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
-  //   this.grid[toLoc.x][toLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
-  // }
+  slideTile(newArr, rowIdx) {
+    this.grid[rowIdx] = newArr;
+
+    for (let i = 0; i < newArr.length; i++) {
+      const element = newArr[i];
+      this.grid[rowIdx][i].y = element.y;
+      this.grid[rowIdx][i].x = element.x;
+    }
+
+    // this.grid[toLoc.x][toLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
+    // this.grid[toLoc.x][toLoc.y].y = toLoc.y;
+    // this.grid[fromLoc.x][fromLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
+    // this.grid[toLoc.x][toLoc.y].x = this.grid[fromLoc.x][fromLoc.y].x;
+  }
 
   merge(row, rowIdx) {
     for (let i = 0; i < 3; i++) {
@@ -175,20 +184,6 @@ export default class Board {
         }
       }
     }
-  }
-
-  redraw() {
-    let w = 100;
-    for (let i = 0; i < this.grid.length; i++) {
-      for (let j = 0; j < this.grid.length; j++) {
-        this.ctx.rect(i * w, j * w, w, w);
-        this.ctx.stroke();
-
-        this.ctx.clearRect(i * w, j * w, w, w);
-      }
-    }
-
-    this.draw();    
   }
 
   scoreBoard() {

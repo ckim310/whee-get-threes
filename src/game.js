@@ -53,31 +53,28 @@ export default class Game {
         this.setup();
         break;
     }
-
+    
+    if (direction) {
+      for (let i = 0; i < this.board.grid.length; i++) {
+        if (this.board.grid[i][0].value !== 0) {
+          this.board.merge(this.board.grid[i], i);
+        }
+      }
+    }
+    
     if (direction) {
       for (let i = 0; i < this.board.grid.length; i++) {
         this.board.move(this.board.grid[i], i);
       }
-    }
-
-    if (direction === "up" || direction === "left") {
-      for (let i = 0; i < this.board.grid.length; i++) {
-        this.board.merge(this.board.grid[i], i);
+      if (direction === "down" || direction === "right") {
+        this.board.reverse();
       }
-    }
-
-    if (direction === "down" || direction === "right") {
-      for (let i = 0; i < this.board.grid.length; i++) {
-        if (this.board.grid[i][0] !== 0) {
-          this.board.merge(this.board.grid[i], i);
-        }
-      }
-      this.board.reverse();
     }
 
     if (direction === "right" || direction === "left") {
       this.board.grid = this.board.rotate();
     }
+
 
     if (direction) {
       this.board.addNumber();
